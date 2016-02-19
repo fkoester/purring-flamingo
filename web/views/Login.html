@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<div id="login-container" class="container">
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6">
+			<div class="md-whiteframe-24dp" style="padding: 40px; padding-bottom: 10px; background-color: white;">
+
+				<md-toolbar class="md-warn" data-ng-show="message">
+					{{ message }}
+				</md-toolbar>
+
+				<select class="form-control"
+					data-ng-show="selectedBackend"
+					data-ng-options="backend as backend.name for backend in availableBackends track by backend.url"
+					data-ng-model="selectedBackend">
+				</select>
+
+				<form ng-submit="submit()">
+
+					<h1 class="md-headline text-center">Anmelden</h1>
+
+					<md-input-container>
+					  <label>Handynummer oder E-Mail-Adresse</label>
+					  <input type="text" ng-model="user.username" required>
+					</md-input-container>
+
+					<md-input-container>
+					  <label>Passwort</label>
+					  <input type="password" ng-model="user.password" ng-required="true">
+					</md-input-container>
+
+					<md-card-actions layout="row" layout-align="center">
+						<md-button class="md-raised md-primary" type="submit">Anmelden</md-button>
+					</md-card-actions>
+				</form>
+
+			</div>
+		  <div class="col-md-3">
+		  </div>
+	  </div>
+	</div>
+</div>

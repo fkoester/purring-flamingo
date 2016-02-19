@@ -1,0 +1,4 @@
+/node_modules
+/bower_components
+.directory
+/test-env.sh

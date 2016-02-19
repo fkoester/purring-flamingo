@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<title>Purring Flamingo</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Angular Material -->
+	<link rel="stylesheet" href="/angular-material/angular-material.css" />
+
+	<!-- Angular Loading Bar -->
+	<link rel="stylesheet" href="/angular-loading-bar/build/loading-bar.css" />
+
+	<!-- Angular UI notifications -->
+	<link rel="stylesheet" href="/angular-ui-notification/dist/angular-ui-notification.css">
+
+	<!-- Angular file manager -->
+	<link rel="stylesheet" href="/bootswatch/paper/bootstrap.min.css" />
+	<link rel="stylesheet" href="/angular-filemanager/dist/angular-filemanager.min.css">
+
+	<!-- angular-hotkeys -->
+	<link rel="stylesheet" href="/angular-hotkeys/build/hotkeys.css">
+
+	<!-- Own css -->
+	<link rel="stylesheet" href="/assets/css/common.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar" style="margin-bottom: 0;" role="navigation">
+			<div>
+				<a class="navbar-brand" href="/" style="padding-top: 0;">
+					<h1>Purring Flamingo</h1>
+					<h2>Securr file exchange</h2>
+				</a>
+				<ul class="nav navbar-nav" data-ng-show="userData.isAuthenticated()" data-ng-cloak>
+					<li><a href="/users">Users</a></li>
+				</ul>
+				<div class="btn-group navbar-right navbar-button" data-ng-show="userData.isAuthenticated()" data-ng-cloak uib-dropdown uib-keyboard-nav>
+					<button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" uib-dropdown-toggle>
+						{{ userData.identity().mobile_phone_number }} <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu">
+						<li role="menuitem"><a href="/users/{{ userData.identity()._id}}">Profile</a></li>
+						<li class="divider"></li>
+						<li role="menuitem"><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+				<div class="btn-group navbar-right navbar-button" data-ng-show="!userData.isAuthenticated()" data-ng-cloak>
+					<ul class="nav navbar-nav" data-ng-cloak>
+						<li><a href="/">Files</a></li>
+						<li><a href="/users">Manage users</a></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div data-ui-view ui-router-styles></div>
+
+	<script src="/requirejs/require.js" data-main="/require-config.js"></script>
+</body>
+</html>
