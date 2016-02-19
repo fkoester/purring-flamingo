@@ -6,7 +6,6 @@ var fs = require('fs');
 var path = require('path');
 var bodyParser = require('body-parser');
 var timeout = require('connect-timeout');
-var cors = require('cors');
 
 /**
  * Express configuration
@@ -22,8 +21,6 @@ module.exports = function(app) {
 
 	// Compression
 	app.use(require('compression')());
-
-	app.use(cors());
 
   // Routing
   // app.use('/api', require('../api/routes'));
