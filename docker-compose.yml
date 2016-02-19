@@ -3,4 +3,5 @@ node:
   ports:
    - "127.0.0.1:5000:5000"
   volumes:
+    - /srv/purring-flamingo:/var/lib/purring-flamingo
     - /tmp:/data

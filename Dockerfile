@@ -25,3 +25,4 @@ CMD node server.js
 EXPOSE 5000
 
 VOLUME /data
+VOLUME /var/lib/purring-flamingo/

@@ -22,22 +22,6 @@
 					<li data-ng-repeat="role in userRoles" data-ng-class="{ active: isUserRoleFilter(role.key) }"><a role="menuitem" tabindex="-1" xhref="?userRoleFilter={{ role.key }}" data-ng-click="setUserRoleFilter(role.key); $event.preventDefault();">{{ role.label }}</a></li>
 				</ul>
 			</li>
-			<li uib-dropdown class="dropdown" data-on-toggle="dropdownStatus">
-				<a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-					<span class="pull-left" id="statusDropDown">Status:</span>
-					<span class="pull-left" style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-						<span style="padding-left: 0.5em;" data-ng-show="isStatusFilter('all')">Alle</span>
-						<span style="padding-left: 0.5em;" data-ng-repeat="status in statusList" data-ng-show="isStatusFilter(status.key)">{{ status.label }}</span>
-					</span>
-					<span class="caret"></span>
-					<span class="sr-only">Toggle Dropdown</span>
-				</a>
-				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="statusDropDown">
-					<li data-ng-class="{ active: isStatusFilter('all') }"><a role="menuitem" tabindex="-1" href="?statusFilter=all" data-ng-click="setStatusFilter('all'); $event.preventDefault();">Alle</a></li>
-					<li class="divider"></li>
-					<li data-ng-repeat="status in statusList" data-ng-class="{ active: isStatusFilter(status.key) }"><a role="menuitem" tabindex="-1" xhref="?statusFilter={{ status.key }}" data-ng-click="setStatusFilter(status.key); $event.preventDefault();">{{ status.label }}</a></li>
-				</ul>
-			</li>
 		</ul>
 	</div>
 
@@ -48,24 +32,22 @@
 		<thead>
 			<tr>
 				<th class="col-md-2">
-					<a data-ng-click="order('display_name')" style="cursor: pointer;">Name</a>
+					<a data-ng-click="order('name')" style="cursor: pointer;">Name</a>
 					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('display_name', false)"></span>
 					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('display_name', true)"></span>
 				</th>
 				<th class="col-md-2">
-					<a data-ng-click="order('mobile_phone_number')" style="cursor: pointer;">Handynummer</a>
+					<a data-ng-click="order('email')" style="cursor: pointer;">E-Mail</a>
 					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('mobile_phone_number', false)"></span>
 					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('mobile_phone_number', true)"></span>
 				</th>
 				<th class="col-md-2">
-					<a data-ng-click="order('team_roles')" style="cursor: pointer;">Rollen</a>
+					<a data-ng-click="order('global_roles')" style="cursor: pointer;">Rollen</a>
 					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('team_roles', false)"></span>
 					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('team_roles', true)"></span>
 				</th>
 				<th class="col-md-2">
-					<a data-ng-click="order('status')" style="cursor: pointer;">Status</a>
-					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('status', false)"></span>
-					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('status', true)"></span>
+
 				</th>
 			</tr>
 		</thead>
@@ -75,47 +57,33 @@
 			data-ng-class="{ info: user.selected, userEditMode: user.editMode }" class="repeated-item user-row">
 			<td>
 				<div data-ng-hide="user.editMode">
-					<img data-ng-show="user.profile_picture_url" ng-src="{{ userData.identity().backendUrl + user.profile_picture_url + '_48.png'}}" alt="{{user.display_name }} photo" />
-					<a href="/users/{{ user._id }}" title="{{ user.email }}" class="username">{{ user.display_name }}</a>
-					<span data-ng-show="{{user._id === userData.identity()._id }}" class="label label-info">Das sind Sie</span>
+					<span class="username">{{ user.name }}</span>
+					<!--<span data-ng-show="{{user._id === userData.identity()._id }}" class="label label-info">Das sind Sie</span>-->
 				</div>
 				<div data-ng-show="user.editMode">
-					<input type="text" ng-keyup="checkKeyboardEvents($event)" data-focus-if="user.editMode" data-ng-model="user.display_name" placeholder="Name" class="form-control" />
+					<input type="text" ng-keyup="checkKeyboardEvents($event)" data-focus-if="user.editMode" data-ng-model="user.name" placeholder="Name" class="form-control" />
 				</div>
 			</td>
 			<td>
 				<div data-ng-hide="user.editMode">
-					<span data-ng-show="user.mobile_phone_number">{{ user.mobile_phone_number }}</span>
+					<span data-ng-show="user.email">{{ user.email }}</span>
 				</div>
 				<div data-ng-show="user.editMode">
-					<input type="tel" ng-keyup="checkKeyboardEvents($event)" data-ng-model="user.mobile_phone_number" placeholder="Handynummer" class="form-control" />
+					<input type="email" ng-keyup="checkKeyboardEvents($event)" data-ng-model="user.email" placeholder="E-Mail" class="form-control" />
 				</div>
 			</td>
 			<td>
 				<div data-ng-hide="user.editMode">
 					<ul class="team-role-list">
-						<li data-ng-repeat="role in user.team_roles" class="label label-default team-role" data-ng-class="'team-role-' + role">{{ roleName(role) }}</li>
+						<li data-ng-repeat="role in user.global_roles" class="label label-default team-role" data-ng-class="'team-role-' + role">{{ roleName(role) }}</li>
 					</ul>
 				</div>
 				<div class="edit-user-roles-selection" data-ng-show="user.editMode">
-					<md-checkbox data-ng-checked="user.team_roles.indexOf('driver') >= 0" data-ng-click="toggleRole(user, 'driver')" type="checkbox">Fahrer</md-checkbox>
-					<md-checkbox data-ng-checked="user.team_roles.indexOf('manager') >= 0" data-ng-click="toggleRole(user, 'manager')" type="checkbox">Manager</md-checkbox>
+					<md-checkbox data-ng-checked="user.team_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(user, 'admin')" type="checkbox">Admin</md-checkbox>
 				</div>
 			</td>
 			<td>
 				<div data-ng-hide="user.editMode" class="user-status">
-					<div class="status-data">
-						<div data-ng-show="user.current_driver_status">
-							<span class="label label-success" data-ng-show="user.current_driver_status.status === 'AVAILABLE'">verfügbar</span>
-							<span class="label label-default" data-ng-show="user.current_driver_status.status === 'PAUSE'">Pause</span>
-							<span class="label label-default" data-ng-show="user.current_driver_status.status === 'OFFLINE'">offline</span>
-							<span data-ng-show="user.current_driver_status.timestamp" am-time-ago="user.current_driver_status.timestamp"></span><br />
-							<a title="Fahrer auf Karte anzeigen" data-ng-show="user.current_driver_status.trackpoint.description" href="/map?id={{user._id}}">{{ user.current_driver_status.trackpoint.description }}</a>
-						</div>
-						<div data-ng-hide="user.current_driver_status">
-							<span class="label label-success" data-ng-show="user.status === 'ACTIVE'">aktiv</span>
-						</div>
-					</div>
 					<div class="status-controls" data-ng-hide="addingUser || editingUser">
 						<button class="edit-user-button glyphicon glyphicon-pencil" data-ng-click="editUser(user)"></button>
 					</div>
@@ -127,7 +95,7 @@
 						title="Löschen"
 						data-title="Wirklich löschen?"
 						class="btn btn-danger delete-user-button"
-						message="Soll der Benutzer <b>{{ user.display_name }}</b> wirklich aus der Gruppe entfernt werden?"
+						message="Soll der Benutzer <b>{{ user.name }}</b> wirklich entfernt werden?"
 						confirm-button-type="danger"
 						cancel-button-type="default"
 						confirm-text="Ja, löschen"
@@ -147,7 +115,7 @@
 				<input type="text" ng-keyup="checkKeyboardEvents($event)" data-focus-if="addingUser" data-ng-model="newUser.name" placeholder="Name" class="form-control" />
 			</td>
 			<td>
-				<input type="tel" ng-keyup="checkKeyboardEvents($event)" data-ng-model="newUser.mobile_phone_number" placeholder="Handynummer" class="form-control" />
+				<input type="email" ng-keyup="checkKeyboardEvents($event)" data-ng-model="newUser.email" placeholder="E-Mail" class="form-control" />
 			</td>
 			<td class="add-user-roles-selection">
 				<md-checkbox data-ng-checked="newUser.team_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(newUser, 'admin')" type="checkbox">Admin</md-checkbox>

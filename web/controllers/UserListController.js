@@ -6,7 +6,9 @@ define(['./module', 'angular'], function (controllers, ng) {
 
     UserListKeyboardHelper.apply($scope);
 
-    $scope.users = User.query();
+    $scope.users = User.query(function(users) {
+      console.log(users);
+    });
 
     $scope.initialUser = {
       name: '',

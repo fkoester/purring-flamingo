@@ -4,7 +4,7 @@
 var express = require('express');
 var path = require('path');
 var qs = require('querystring');
-var storageapi = require('angular-filemanager-nodejs-bridge');
+var api = require('../api');
 
 /**
  * Express configuration
@@ -12,7 +12,7 @@ var storageapi = require('angular-filemanager-nodejs-bridge');
 module.exports = function(app) {
 	var env = app.get('env');
 
-	app.use('/api/files', storageapi);
+	app.use('/api', api);
 
 	// Static resources
 	//app.use(express.favicon(path.join(__dirname, '../web', 'favicon.ico')));
@@ -21,7 +21,7 @@ module.exports = function(app) {
 
 	app.get('/*', function(req, res, next) {
 		if (!req.path.match(/(\.js|\.html)$/)) {
-			res.sendfile('index.html', { root: path.join(__dirname, '../web') });
+			res.sendFile('index.html', { root: path.join(__dirname, '../web') });
 		} else {
 			next();
 		}
