@@ -12,7 +12,7 @@ var storageapi = require('angular-filemanager-nodejs-bridge');
 module.exports = function(app) {
 	var env = app.get('env');
 
-	app.use('/files', storageapi);
+	app.use('/api/files', storageapi);
 
 	// Static resources
 	//app.use(express.favicon(path.join(__dirname, '../web', 'favicon.ico')));

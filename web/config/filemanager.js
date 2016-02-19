@@ -20,11 +20,11 @@ define(['app'], function (app) {
         extract: false,
         preview: false
       }),
-      listUrl: '/files/list',
-      downloadFileUrl: '/files/download',
-      uploadUrl: '/files/upload',
-      removeUrl: '/files/remove',
-      createFolderUrl: '/files/createFolder'
+      listUrl: '/api/files/list',
+      downloadFileUrl: '/api/files/download',
+      uploadUrl: '/api/files/upload',
+      removeUrl: '/api/files/remove',
+      createFolderUrl: '/api/files/createFolder'
     });
   });
 });
