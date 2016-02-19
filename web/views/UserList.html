@@ -37,14 +37,14 @@
 					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('display_name', true)"></span>
 				</th>
 				<th class="col-md-2">
-					<a data-ng-click="order('email')" style="cursor: pointer;">E-Mail</a>
-					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('mobile_phone_number', false)"></span>
-					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('mobile_phone_number', true)"></span>
+					<a data-ng-click="order('username')" style="cursor: pointer;">Benutzername</a>
+					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('username', false)"></span>
+					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('username', true)"></span>
 				</th>
 				<th class="col-md-2">
 					<a data-ng-click="order('global_roles')" style="cursor: pointer;">Rollen</a>
-					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('team_roles', false)"></span>
-					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('team_roles', true)"></span>
+					<span class="glyphicon glyphicon-sort-by-attributes" data-ng-show="isOrder('global_roles', false)"></span>
+					<span class="glyphicon glyphicon-sort-by-attributes-alt" data-ng-show="isOrder('global_roles', true)"></span>
 				</th>
 				<th class="col-md-2">
 
@@ -66,20 +66,20 @@
 			</td>
 			<td>
 				<div data-ng-hide="user.editMode">
-					<span data-ng-show="user.email">{{ user.email }}</span>
+					<span data-ng-show="user.username">{{ user.username }}</span>
 				</div>
 				<div data-ng-show="user.editMode">
-					<input type="email" ng-keyup="checkKeyboardEvents($event)" data-ng-model="user.email" placeholder="E-Mail" class="form-control" />
+					<input type="text" ng-keyup="checkKeyboardEvents($event)" data-ng-model="user.username" placeholder="Benutzername" class="form-control" />
 				</div>
 			</td>
 			<td>
 				<div data-ng-hide="user.editMode">
-					<ul class="team-role-list">
-						<li data-ng-repeat="role in user.global_roles" class="label label-default team-role" data-ng-class="'team-role-' + role">{{ roleName(role) }}</li>
+					<ul class="global-role-list">
+						<li data-ng-repeat="role in user.global_roles" class="label label-default global-role" data-ng-class="'global-role-' + role">{{ roleName(role) }}</li>
 					</ul>
 				</div>
 				<div class="edit-user-roles-selection" data-ng-show="user.editMode">
-					<md-checkbox data-ng-checked="user.team_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(user, 'admin')" type="checkbox">Admin</md-checkbox>
+					<md-checkbox data-ng-checked="user.global_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(user, 'admin')" type="checkbox">Admin</md-checkbox>
 				</div>
 			</td>
 			<td>
@@ -115,10 +115,10 @@
 				<input type="text" ng-keyup="checkKeyboardEvents($event)" data-focus-if="addingUser" data-ng-model="newUser.name" placeholder="Name" class="form-control" />
 			</td>
 			<td>
-				<input type="email" ng-keyup="checkKeyboardEvents($event)" data-ng-model="newUser.email" placeholder="E-Mail" class="form-control" />
+				<input type="text" ng-keyup="checkKeyboardEvents($event)" data-ng-model="newUser.username" placeholder="E-Mail" class="form-control" />
 			</td>
 			<td class="add-user-roles-selection">
-				<md-checkbox data-ng-checked="newUser.team_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(newUser, 'admin')" type="checkbox">Admin</md-checkbox>
+				<md-checkbox data-ng-checked="newUser.global_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(newUser, 'admin')" type="checkbox">Admin</md-checkbox>
 			</td>
 			<td class="add-user-controls">
 				<button class="btn btn-success add-user-button" data-ng-click="addUser()">Hinzufügen</button>

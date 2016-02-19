@@ -1,0 +1,4 @@
+angular-filemanager > div {
+  overflow-y: hidden;
+  height: calc(100vh - 80px);
+}

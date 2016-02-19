@@ -19,25 +19,22 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
 
         return identity;
       },
-      passwordLogin: function(backendUrl, mobile_phone_number, email, password) {
+      passwordLogin: function(username, password) {
         var self = this;
         var loginData = {
           type: 'password',
-          mobile_phone_number: mobile_phone_number,
-          email: email,
+          username: username,
           password: password
         };
-        return self.login(backendUrl, loginData);
+        return self.login(loginData);
       },
-      authenticate: function(backendUrl, token) {
+      authenticate: function(token) {
         var profile = decodeJsonWebTokenPayload($window, token);
         $window.localStorage.token = token;
-        $window.localStorage.backendUrl = backendUrl;
 
         identity = profile;
-        identity.backendUrl = backendUrl;
       },
-      login: function(backendUrl, loginData) {
+      login: function(loginData) {
         var self = this;
         var deferred = $q.defer();
         var loginRequest = {
@@ -51,10 +48,10 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
         }
 
         $http
-        .post(backendUrl + '/auth/login', loginRequest)
+        .post('/api/auth/login', loginRequest)
         .success(function (data, status, headers, config) {
           console.log(data);
-          self.authenticate(backendUrl, data.token);
+          self.authenticate(data.token);
 
           deferred.resolve(identity);
         })
@@ -79,7 +76,7 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
         }
 
         $http
-        .post(identity.backendUrl + '/logout')
+        .post('/logout')
         .success(function (data, status, headers, config) {
 
           identity = undefined;
@@ -110,9 +107,6 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
       } catch(e) {
         delete $window.localStorage.token;
         return;
-      }
-      if($window.localStorage.backendUrl) {
-        identity.backendUrl = $window.localStorage.backendUrl;
       }
     }
 

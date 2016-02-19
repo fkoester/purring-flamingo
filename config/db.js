@@ -21,7 +21,7 @@ module.exports = {
   getUsers: function() {
     return db('users');
   },
-  findUserByEmail: function(email) {
-    return db('users').find({email: email});
+  findUserByUsername: function(username) {
+    return db('users').find({username});
   }
 };

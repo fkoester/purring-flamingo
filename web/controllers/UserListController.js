@@ -12,8 +12,8 @@ define(['./module', 'angular'], function (controllers, ng) {
 
     $scope.initialUser = {
       name: '',
-      mobile_phone_number: '',
-      team_roles: []
+      username: '',
+      global_roles: []
     };
 
     $scope.newUser = ng.copy($scope.initialUser);
@@ -24,7 +24,7 @@ define(['./module', 'angular'], function (controllers, ng) {
     ];
 
     $scope.userRoleFilter = function(user) {
-      return $scope._userRoleFilter.length === 0 || user.team_roles.some(function(role) {
+      return $scope._userRoleFilter.length === 0 || user.global_roles.some(function(role) {
         return $scope._userRoleFilter.indexOf(role) >= 0;
       });
     };
@@ -68,11 +68,11 @@ define(['./module', 'angular'], function (controllers, ng) {
     };
 
     $scope.toggleRole = function(user, role) {
-      var idx = user.team_roles.indexOf(role);
+      var idx = user.global_roles.indexOf(role);
       if (idx >= 0) {
-        user.team_roles.splice(idx, 1);
+        user.global_roles.splice(idx, 1);
       } else {
-        user.team_roles.push(role);
+        user.global_roles.push(role);
       }
     };
 
@@ -99,9 +99,9 @@ define(['./module', 'angular'], function (controllers, ng) {
 
     $scope.cancelEditUser = function(user) {
 
-      user.display_name = $scope.editedUserOrig.display_name;
-      user.mobile_phone_number = $scope.editedUserOrig.mobile_phone_number;
-      user.roles = $scope.editedUserOrig.roles;
+      user.name = $scope.editedUserOrig.name;
+      user.username = $scope.editedUserOrig.username;
+      user.global_roles = $scope.editedUserOrig.global_roles;
       $scope.editedUserOrig = undefined;
       $scope.editedUser = undefined;
 
@@ -119,12 +119,9 @@ define(['./module', 'angular'], function (controllers, ng) {
 
       var user = new User();
 
-      user.full_name = $scope.newUser.name;
-      user.display_name = $scope.newUser.name;
+      user.name = $scope.newUser.name;
 
-      user.mobile_phone_number = $scope.newUser.mobile_phone_number;
-
-      user.roles = $scope.newUser.roles;
+      user.global_roles = $scope.newUser.global_roles;
 
       user.$save().then(function(createdUser) {
         $scope.cancelAddingUser();

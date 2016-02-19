@@ -3,9 +3,9 @@
 define(['./module'], function (controllers) {
 	'use strict';
 
-	controllers.controller('LogoutController', function ($location, userData) {
+	controllers.controller('LogoutController', function ($location, loginData) {
 
-		userData.logout().then(function() {
+		loginData.logout().then(function() {
 			$location.path("/login");
 		});
 	});

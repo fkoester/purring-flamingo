@@ -15,7 +15,7 @@ var zlib = require('zlib');
 */
 var secret = "no real secret";
 
-var no_authentication_required_for_paths = ['/', '/version', /^\/auth\/.*/i];
+var no_authentication_required_for_paths = ['/', '/version', /^\/api\/auth\/.*/i];
 
 var privateKey, publicKey;
 

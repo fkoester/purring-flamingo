@@ -10,18 +10,12 @@
 					{{ message }}
 				</md-toolbar>
 
-				<select class="form-control"
-					data-ng-show="selectedBackend"
-					data-ng-options="backend as backend.name for backend in availableBackends track by backend.url"
-					data-ng-model="selectedBackend">
-				</select>
-
 				<form ng-submit="submit()">
 
 					<h1 class="md-headline text-center">Anmelden</h1>
 
 					<md-input-container>
-					  <label>Handynummer oder E-Mail-Adresse</label>
+					  <label>Benutzername</label>
 					  <input type="text" ng-model="user.username" required>
 					</md-input-container>
 
