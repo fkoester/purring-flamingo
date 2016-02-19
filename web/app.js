@@ -21,9 +21,7 @@ define([
    './controllers/index',
    //'./directives/index',
    //'./filters/index',
-   './services/index',
-   './config/build',
-   './config/env'
+   './services/index'
 ], function (ng) {
    'use strict';
 

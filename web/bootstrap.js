@@ -8,9 +8,8 @@ define([
     'app',
     './config/routes',
     './config/auth',
-    './config/injectVersion',
-    './config/socket-io',
-    './config/moment',
+    //'./config/injectVersion',
+    //'./config/moment',
     './config/injectLoginData',
     './config/filemanager'
 ], function (require, ng) {
