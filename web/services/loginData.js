@@ -118,12 +118,13 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
     var payloadString = $window.atob(payloadBase64);
     var payload = JSON.parse(payloadString);
 
-    var compressedProfile = $window.atob(payload.profile);
+    //var compressedProfile = $window.atob(payload.profile);
 
-    var profileString = pako.inflate(compressedProfile, { to: 'string' });
-    var profile = JSON.parse(profileString);
-    profile.iat = payload.iat;
-    profile.exp = payload.exp;
-    return profile;
+    //var profileString = pako.inflate(compressedProfile, { to: 'string' });
+    //var profile = JSON.parse(profileString);
+    //profile.iat = payload.iat;
+    //profile.exp = payload.exp;
+    //return profile;
+    return payload;
   }
 });

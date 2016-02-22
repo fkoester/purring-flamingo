@@ -115,7 +115,7 @@
 				<input type="text" ng-keyup="checkKeyboardEvents($event)" data-focus-if="addingUser" data-ng-model="newUser.name" placeholder="Name" class="form-control" />
 			</td>
 			<td>
-				<input type="text" ng-keyup="checkKeyboardEvents($event)" data-ng-model="newUser.username" placeholder="E-Mail" class="form-control" />
+				<input type="text" ng-keyup="checkKeyboardEvents($event)" data-ng-model="newUser.username" placeholder="Benutzername" class="form-control" />
 			</td>
 			<td class="add-user-roles-selection">
 				<md-checkbox data-ng-checked="newUser.global_roles.indexOf('admin') >= 0" data-ng-click="toggleRole(newUser, 'admin')" type="checkbox">Admin</md-checkbox>

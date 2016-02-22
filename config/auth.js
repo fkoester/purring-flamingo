@@ -49,14 +49,15 @@ function sign(payload) {
 }
 
 module.exports.encodeAndSignProfile = function(profile) {
-  var payload = {
-    profile: zlib.deflateSync(JSON.stringify(profile)).toString('base64')
-  };
+  // var payload = {
+  //   profile: zlib.deflateSync(JSON.stringify(profile)).toString('base64')
+  // };
 
-  return sign(payload);
+  return sign(profile);
 };
 
 module.exports.decodeProfile = function(profile) {
 
-  return JSON.parse(zlib.inflateSync(new Buffer(profile, 'base64')));
+  //return JSON.parse(zlib.inflateSync(new Buffer(profile, 'base64')));
+  return profile;
 };

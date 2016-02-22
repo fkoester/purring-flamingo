@@ -17,6 +17,8 @@ require('./config/express')(app);
 
 require('./config/auth').init(app);
 
+require('./config/pathresolver');
+
 // Routing
 require('./config/routes')(app);
 

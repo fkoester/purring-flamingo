@@ -120,11 +120,12 @@ define(['./module', 'angular'], function (controllers, ng) {
       var user = new User();
 
       user.name = $scope.newUser.name;
-
+      user.username = $scope.newUser.username;
       user.global_roles = $scope.newUser.global_roles;
 
       user.$save().then(function(createdUser) {
         $scope.cancelAddingUser();
+        console.log(createdUser);
         $scope.users.push(createdUser);
       });
     };
