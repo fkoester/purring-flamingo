@@ -18,8 +18,11 @@ RUN node ./node_modules/.bin/bower --allow-root install
 # Copy over remaining sources
 COPY . ./
 
+# Generate build-time configuration
+RUN ./node_modules/.bin/grunt build
+
 # Start the web application server
-CMD node server.js
+CMD ./node_modules/.bin/grunt && node server.js
 
 # The port(s) the web application uses
 EXPOSE 5000

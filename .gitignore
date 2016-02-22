@@ -2,3 +2,5 @@
 /bower_components
 .directory
 /test-env.sh
+/web/config/build.js
+/web/config/env.js

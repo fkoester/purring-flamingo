@@ -28,9 +28,9 @@
 	<header>
 		<nav class="navbar" style="margin-bottom: 0;" role="navigation">
 			<div>
-				<a class="navbar-brand" href="/" style="padding-top: 0;">
-					<h1>Purring Flamingo</h1>
-					<h2>Securr file exchange</h2>
+				<a class="navbar-brand" href="/" style="padding-top: 0;" data-ng-cloak>
+					<h1>{{ config.app_title }}</h1>
+					<h2>{{ config.app_subtitle }}</h2>
 				</a>
 				<ul class="nav navbar-nav" data-ng-show="userData.isAuthenticated()" data-ng-cloak>
 					<li><a href="/users">Users</a></li>

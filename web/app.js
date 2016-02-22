@@ -21,7 +21,9 @@ define([
    './controllers/index',
    //'./directives/index',
    //'./filters/index',
-   './services/index'
+   './services/index',
+   './config/build',
+   './config/env'
 ], function (ng) {
    'use strict';
 
@@ -70,6 +72,9 @@ define([
        //'ngFileUpload',
 
        // File manager
-       'FileManagerApp'
+       'FileManagerApp',
+
+       'build-config',
+       'env-config'
    ]);
 });

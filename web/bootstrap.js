@@ -8,7 +8,8 @@ define([
     'app',
     './config/routes',
     './config/auth',
-    //'./config/injectVersion',
+    './config/injectVersion',
+    './config/injectConfig',
     //'./config/moment',
     './config/injectLoginData',
     './config/filemanager'
