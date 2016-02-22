@@ -6,6 +6,9 @@ WORKDIR /srv/src
 # Copy over package.json
 ADD package.json ./
 
+# bcrypt needs node-gyp for building
+RUN npm install -g node-gyp
+
 # Install dependencies
 RUN npm install --silent
 
