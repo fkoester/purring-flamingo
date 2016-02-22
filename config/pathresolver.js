@@ -1,6 +1,7 @@
 /*jslint node: true */
 const pathresolver = require('angular-filemanager-nodejs-bridge').pathresolver;
 const path = require('path');
+const fs = require('fs.extra');
 
 pathresolver.baseDir = function(req) {
 
@@ -14,5 +15,10 @@ pathresolver.baseDir = function(req) {
   }
 
   // Other users can only see their own directory
-  return path.join(process.env.DATA_DIR, req.user.username);
+  var baseDir = path.join(process.env.DATA_DIR, req.user.username);
+
+  // Create the directory if it does not exist already
+  fs.mkdirpSync(baseDir);
+
+  return baseDir;
 };
