@@ -4,10 +4,11 @@ const express = require('express');
 const users = express.Router();
 const crypto = require('crypto');
 const Promise = require('bluebird');
-const bcrypt = require('bcrypt-as-promised');
+const bcrypt = require('bcrypt');
 const db = require('../config/db');
 
 Promise.promisifyAll(crypto);
+Promise.promisifyAll(bcrypt);
 
 users.get('/', function(req, res, next) {
 
@@ -23,7 +24,9 @@ users.post('/', function(req, res, next) {
   promise = promise.then(function(buffer) {
     var generatedPassword = buffer.toString('hex');
 
-    return [generatedPassword, bcrypt.hash(generatedPassword, 10)];
+    return bcrypt.genSaltAsync(10).then(function(salt) {
+      return [generatedPassword, bcrypt.hashAsync(generatedPassword, salt)];
+    });
   });
 
   promise = promise.spread(function(generatedPassword, passwordHash) {

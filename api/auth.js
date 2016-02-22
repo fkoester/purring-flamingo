@@ -1,10 +1,13 @@
 /*jslint node: true */
 var express = require('express');
-var bcrypt = require('bcrypt-as-promised');
+var bcrypt = require('bcrypt');
+var Promise = require('bluebird');
 var auth = express.Router();
 var db = require('../config/db');
 var errors = require('../errors');
 var authConfig = require('../config/auth');
+
+Promise.promisifyAll(bcrypt);
 
 auth.post('/login', function (req, res, next) {
   return login(req, res);
@@ -42,10 +45,14 @@ function login(req, res) {
     throw new errors.UserHasNoPasswordError();
   }
 
-  promise = bcrypt.compare(password, user.password_hash);
+  promise = bcrypt.compareAsync(password, user.password_hash);
 
-  promise = promise.tap(function() {
-    console.log('User successfully verified');
+  promise = promise.tap(function(result) {
+    if(result) {
+      console.log('User successfully verified');
+    } else {
+      throw new Error("Hashes did not match!");
+    }
   });
 
   promise = promise.then(function() {

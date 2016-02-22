@@ -10,7 +10,7 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "angular-filemanager-nodejs-bridge": "^0.1.2",
-    "bcrypt-as-promised": "^1.1.0",
+    "bcrypt": "^0.8.5",
     "bluebird": "^3.3.1",
     "body-parser": "^1.15.0",
     "bower": "^1.7.7",
