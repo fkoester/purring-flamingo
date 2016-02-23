@@ -6,7 +6,17 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
 
     function decodeJsonWebTokenPayload(jwtString) {
       var payloadBase64 = jwtString.split('.')[1];
-      var payloadString = base64.decode(payloadBase64);
+
+      // We need to add the base64 padding here, otherwise the base64 lib fails
+      if(payloadBase64 % 4 === 2) {
+        payloadBase64 += '==';
+      } else if(payloadBase64 % 4 === 3) {
+        payloadBase64 += '=';
+      } else if(payloadBase64 % 4 === 1) {
+        throw new Error('Base64 input is malformed!');
+      }
+
+      var payloadString = base64.decode(payloadBase64 + '==');
       var payload = JSON.parse(payloadString);
 
       //var compressedProfile = $window.atob(payload.profile);
@@ -84,7 +94,6 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
         $http
         .post('/api/auth/login', loginRequest)
         .success(function (data, status, headers, config) {
-          console.log(data);
           self.authenticate(data.token);
 
           deferred.resolve(identity);
