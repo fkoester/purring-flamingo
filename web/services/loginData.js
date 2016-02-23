@@ -8,15 +8,15 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
       var payloadBase64 = jwtString.split('.')[1];
 
       // We need to add the base64 padding here, otherwise the base64 lib fails
-      if(payloadBase64 % 4 === 2) {
+      if(payloadBase64.length % 4 === 2) {
         payloadBase64 += '==';
-      } else if(payloadBase64 % 4 === 3) {
+      } else if(payloadBase64.length % 4 === 3) {
         payloadBase64 += '=';
-      } else if(payloadBase64 % 4 === 1) {
-        throw new Error('Base64 input is malformed!');
+      } else if(payloadBase64.length % 4 === 1) {
+        throw new Error('Base64 input is malformed');
       }
 
-      var payloadString = base64.decode(payloadBase64 + '==');
+      var payloadString = base64.decode(payloadBase64);
       var payload = JSON.parse(payloadString);
 
       //var compressedProfile = $window.atob(payload.profile);
