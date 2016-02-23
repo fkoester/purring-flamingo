@@ -43,7 +43,7 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav" data-ng-show="loginData.isAuthenticated()" data-ng-cloak>
 						<li data-ng-class="{'active': location.path() === '/' }"><a href="/">Files <span class="sr-only">(current)</span></a></li>
-						<li data-ng-class="{'active': location.path() === '/users' }"><a href="/users">Users</a></li>
+						<li data-ng-show="loginData.isAdmin()" data-ng-class="{'active': location.path() === '/users' }"><a href="/users">Users</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">

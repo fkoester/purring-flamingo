@@ -55,9 +55,12 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
       },
       isInRole: function(role) {
         var authenticated = this.isAuthenticated();
-        if (!authenticated || !identity.roles) return false;
+        if (!authenticated || !identity.global_roles) return false;
 
-        return identity.roles.indexOf(role) != -1;
+        return identity.global_roles.indexOf(role) != -1;
+      },
+      isAdmin: function() {
+        return this.isInRole('admin');
       },
       identity: function() {
 
