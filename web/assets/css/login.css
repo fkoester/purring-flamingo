@@ -1,13 +1,3 @@
-
-div[data-ui-view] {
-    background-color: #2196F3;
-    background-image: linear-gradient(#2196F3 80%, #2196F3 100%);
-    background-image: -moz-linear-gradient(#2196F3 80%, #2196F3 100%);
-    background-image: -webkit-linear-gradient(#2196F3 80%, #2196F3 100%);
-    background-image: -o-linear-gradient(#2196F3 80%, #2196F3 100%);
-    background-image: -ms-linear-gradient(#2196F3 80%, #2196F3 100%);
-}
-
 #login-container {
   padding-top: 100px;
   min-height: 100vh;
