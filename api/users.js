@@ -6,11 +6,12 @@ const crypto = require('crypto');
 const Promise = require('bluebird');
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
+const mustbe = require("mustbe").routeHelpers();
 
 Promise.promisifyAll(crypto);
 Promise.promisifyAll(bcrypt);
 
-users.get('/', function(req, res, next) {
+users.get('/', mustbe.authorized("access all users"), function(req, res, next) {
 
   res.status(200);
   res.send(db.getUsers());

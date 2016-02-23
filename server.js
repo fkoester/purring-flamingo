@@ -12,6 +12,10 @@ process.env.DB_DIR = process.env.DB_DIR || '/var/lib/purring-flamingo/';
 var app = require('express')();
 var server = require('http').createServer(app);
 
+var mustBe = require("mustbe");
+var mustBeConfig = require("./config/mustbe");
+mustBe.configure(mustBeConfig);
+
 // Express settings
 require('./config/express')(app);
 
