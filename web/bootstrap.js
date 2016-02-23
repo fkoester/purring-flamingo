@@ -12,6 +12,7 @@ define([
     './config/injectConfig',
     //'./config/moment',
     './config/injectLoginData',
+    './config/injectLocation',
     './config/filemanager'
 ], function (require, ng) {
     'use strict';

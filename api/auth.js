@@ -59,6 +59,7 @@ function login(req, res) {
     // We are sending the profile inside the token
     var profile = {
       username: user.username,
+      name: user.name,
       global_roles: user.global_roles,
     };
 
