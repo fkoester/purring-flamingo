@@ -24,6 +24,7 @@ require.config({
     'angular-ui-router-styles': '/angular-ui-router-styles/ui-router-styles',
     'angular-ui-select': '/ui-select/dist/select',
     'angular-ui-sortable': '/angular-ui-sortable/sortable',
+    'angular-utf8-base64': '/angular-utf8-base64/angular-utf8-base64',
     'bootstrap-js': '/bootstrap/dist/js/bootstrap',
     'socket.io-client': '/socket.io-client/socket.io',
     'angular-socket-io': '/angular-socket-io/socket',
@@ -101,6 +102,9 @@ require.config({
       deps: ['angular']
     },
     'angular-ui-sortable': {
+      deps: ['angular']
+    },
+    'angular-utf8-base64': {
       deps: ['angular']
     },
     'bootstrap-js': {

@@ -12,3 +12,14 @@ Authentication can either be done by logging in via username/password and/or by 
 For displaying the directory structures we use the fantastic [angular-filemanager](https://github.com/joni2back/angular-filemanager) widget.
 
 As a storage backend we use the [Node.js bridge](https://github.com/fkoester/angular-filemanager-nodejs-bridge).
+
+## TODOS
+
+* Add missing backend functionality in the [Node.js bridge](https://github.com/fkoester/angular-filemanager-nodejs-bridge).
+* User+Password management
+* Sharing directories via Link
+* angular-filemanager: Improved date formatting
+* angular-filemanager: Display upload progress
+* angular-filemanager: [Drag and drop upload](https://github.com/joni2back/angular-filemanager/issues/73)
+* angular-filemanager: [Drag and drop move etc.](https://github.com/joni2back/angular-filemanager/issues/24)
+* PDF file preview?

@@ -12,6 +12,7 @@ define([
    'angular-ui-notification',
    'angular-ui-router',
    'angular-ui-router-styles',
+   'angular-utf8-base64',
    'angular-resource',
    //'angular-ui-select',
    //'angular-ui-sortable',
@@ -73,6 +74,9 @@ define([
 
        // File manager
        'FileManagerApp',
+
+       // AngularJS service for UTF-8 and Base64 and Base64url Javascript Encoding
+       'ab-base64',
 
        'build-config',
        'env-config'

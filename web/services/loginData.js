@@ -2,8 +2,42 @@
 define(['./module', 'angular', 'pako'], function (services, ng, pako) {
   'use strict';
 
-  services.factory('loginData', function($q, $http, $window) {
-    var identity = getExistingIdentity($window);
+  services.factory('loginData', function($q, $http, $window, base64) {
+
+    function decodeJsonWebTokenPayload(jwtString) {
+      var payloadBase64 = jwtString.split('.')[1];
+      var payloadString = base64.decode(payloadBase64);
+      var payload = JSON.parse(payloadString);
+
+      //var compressedProfile = $window.atob(payload.profile);
+
+      //var profileString = pako.inflate(compressedProfile, { to: 'string' });
+      //var profile = JSON.parse(profileString);
+      //profile.iat = payload.iat;
+      //profile.exp = payload.exp;
+      //return profile;
+      return payload;
+    }
+
+    function removeLocalData() {
+      delete $window.localStorage.token;
+    }
+
+    function getExistingIdentity() {
+      var identity;
+      if($window.localStorage.token) {
+        try {
+          identity = decodeJsonWebTokenPayload($window.localStorage.token);
+        } catch(e) {
+          delete $window.localStorage.token;
+          return;
+        }
+      }
+
+      return identity;
+    }
+
+    var identity = getExistingIdentity();
 
     return {
       isAuthenticated: function() {
@@ -29,7 +63,7 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
         return self.login(loginData);
       },
       authenticate: function(token) {
-        var profile = decodeJsonWebTokenPayload($window, token);
+        var profile = decodeJsonWebTokenPayload(token);
         $window.localStorage.token = token;
 
         identity = profile;
@@ -58,7 +92,7 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
         .error(function (data, status, headers, config) {
 
           // Erase the token if the user fails to log in
-          removeLocalData($window);
+          removeLocalData();
 
           identity = undefined;
           deferred.reject(data);
@@ -80,13 +114,13 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
         .success(function (data, status, headers, config) {
 
           identity = undefined;
-          removeLocalData($window);
+          removeLocalData();
           deferred.resolve();
         })
         .error(function (data, status, headers, config) {
 
           identity = undefined;
-          removeLocalData($window);
+          removeLocalData();
           deferred.resolve();
         });
 
@@ -94,37 +128,4 @@ define(['./module', 'angular', 'pako'], function (services, ng, pako) {
       }
     };
   });
-
-  function removeLocalData($window) {
-    delete $window.localStorage.token;
-  }
-
-  function getExistingIdentity($window) {
-    var identity;
-    if($window.localStorage.token) {
-      try {
-        identity = decodeJsonWebTokenPayload($window, $window.localStorage.token);
-      } catch(e) {
-        delete $window.localStorage.token;
-        return;
-      }
-    }
-
-    return identity;
-  }
-
-  function decodeJsonWebTokenPayload($window, jwtString) {
-    var payloadBase64 = jwtString.split('.')[1];
-    var payloadString = $window.atob(payloadBase64);
-    var payload = JSON.parse(payloadString);
-
-    //var compressedProfile = $window.atob(payload.profile);
-
-    //var profileString = pako.inflate(compressedProfile, { to: 'string' });
-    //var profile = JSON.parse(profileString);
-    //profile.iat = payload.iat;
-    //profile.exp = payload.exp;
-    //return profile;
-    return payload;
-  }
 });
