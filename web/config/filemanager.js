@@ -1,5 +1,5 @@
 /* global define */
-define(['app', angular], function (app, ng) {
+define(['app', 'angular'], function (app, ng) {
   'use strict';
 
   app.config(function (fileManagerConfigProvider) {
