@@ -1,5 +1,5 @@
 /* global define */
-define(['app'], function (app) {
+define(['app', angular], function (app, ng) {
   'use strict';
 
   app.config(function (fileManagerConfigProvider) {
@@ -10,7 +10,7 @@ define(['app'], function (app) {
       defaultLang: 'de',
       hidePermissions: true,
       useBinarySizePrefixes: true,
-      allowedActions: angular.extend(defaults.allowedActions, {
+      allowedActions: ng.extend(defaults.allowedActions, {
         upload: true,
         remove: true,
         edit: false,
@@ -24,7 +24,9 @@ define(['app'], function (app) {
       downloadFileUrl: '/api/files/download',
       uploadUrl: '/api/files/upload',
       removeUrl: '/api/files/remove',
-      createFolderUrl: '/api/files/createFolder'
+      createFolderUrl: '/api/files/createFolder',
+      renameUrl: '/api/files/rename',
+      copyUrl: '/api/files/copy',
     });
   });
 });
