@@ -13,6 +13,7 @@ require.config({
     'angular-cookies': '/angular-cookies/angular-cookies',
     'angular-filemanager': '/angular-filemanager/dist/angular-filemanager.min',
     'angular-file-upload': '/ng-file-upload/ng-file-upload',
+    'angular-file-saver': '/angular-file-saver/dist/angular-file-saver',
     'angular-hotkeys': '/angular-hotkeys/build/hotkeys',
     'angular-material': '/angular-material/angular-material',
     'angular-moment': '/angular-moment/angular-moment',
@@ -32,7 +33,9 @@ require.config({
     'moment': '/moment/moment',
     'moment-locale-de': '/moment/locale/de',
     'ng-focus-if': '/ng-focus-if/focusIf',
-    'pako': '/pako/dist/pako'
+    'pako': '/pako/dist/pako',
+    'file-saver-js': '/file-saver.js/FileSaver',
+    'blob-polyfill': '/blob-polyfill/Blob'
   },
 
   // angular does not support AMD out of the box, put it in a shim
@@ -57,10 +60,13 @@ require.config({
       deps: ['angular']
     },
     'angular-filemanager': {
-      deps: ['angular', 'angular-translate', 'angular-cookies', 'bootstrap-js']
+      deps: ['angular', 'angular-translate', 'angular-cookies', 'bootstrap-js', 'angular-file-saver']
     },
     'angular-file-upload': {
       deps: ['angular']
+    },
+    'angular-file-saver': {
+      deps: ['angular', 'file-saver-js', 'blob-polyfill']
     },
     'angular-material': {
       deps: ['angular-aria', 'angular-animate']
