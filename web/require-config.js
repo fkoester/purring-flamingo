@@ -10,7 +10,6 @@ require.config({
     'angular-loading-bar': '/angular-loading-bar/build/loading-bar',
     'angular-aria': '/angular-aria/angular-aria',
     'angular-animate': '/angular-animate/angular-animate',
-    'angular-cookies': '/angular-cookies/angular-cookies',
     'angular-filemanager': '/angular-filemanager/dist/angular-filemanager.min',
     'angular-file-upload': '/ng-file-upload/ng-file-upload',
     'angular-file-saver': '/angular-file-saver/dist/angular-file-saver',
@@ -56,11 +55,8 @@ require.config({
     'angular-animate': {
       deps: ['angular']
     },
-    'angular-cookies': {
-      deps: ['angular']
-    },
     'angular-filemanager': {
-      deps: ['angular', 'angular-translate', 'angular-cookies', 'bootstrap-js', 'angular-file-saver']
+      deps: ['angular', 'angular-translate', 'bootstrap-js', 'angular-file-saver']
     },
     'angular-file-upload': {
       deps: ['angular']
