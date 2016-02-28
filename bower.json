@@ -20,7 +20,7 @@
     "angular-animate": "^1.5.0",
     "angular-aria": "^1.5.0",
     "angular-loading-bar": "^0.8.0",
-    "angular-filemanager": "https://github.com/fkoester/angular-filemanager.git#4bf049fe9f0391543a40e55d6c0467f6ef7b3295",
+    "angular-filemanager": "https://github.com/fkoester/angular-filemanager.git#f463d2552b636a8236c836450a3dec92d8574acc",
     "angular-ui-notification": "^0.1.0",
     "angular-ui-router-styles": "^1.1.0",
     "angular-ui-router": "^0.2.18",
